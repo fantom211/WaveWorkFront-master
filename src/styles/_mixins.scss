@@ -1,0 +1,119 @@
+@use 'variables' as *;
+
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media (max-width: $breakpoint-small) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin grid-responsive($min-width: 300px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $spacing-lg;
+}
+
+@mixin gradient-text {
+  background: $gradient-text;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@mixin gradient-bg {
+  background: $gradient-primary;
+}
+
+@mixin card-base {
+  background: $bg-card;
+  border-radius: $radius-xl;
+  border: 1px solid $border-color;
+  transition: $transition;
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+  box-shadow: $shadow-card;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: $accent-purple-light;
+    background: $bg-card-hover;
+    box-shadow: 0 20px 32px -14px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@mixin button-primary {
+  background: linear-gradient(115deg, #8b5cf6, #7c3aed);
+  border: none;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-round;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(115deg, #9b6eff, #8b5cf6);
+  }
+}
+
+@mixin button-outline {
+  background: transparent;
+  border: 1.5px solid $accent-purple;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-round;
+  color: #d9c9ff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+    border-color: $accent-purple-light;
+    color: #f0e6ff;
+  }
+}
+
+@mixin text-gradient {
+  background: $gradient-text;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

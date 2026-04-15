@@ -1,0 +1,337 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.vacancy-card,
+.task-card {
+  background: $bg-card;
+  border-radius: $radius-xl;
+  border: 1px solid $border-color;
+  transition: $transition;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(2px);
+  box-shadow: $shadow-card;
+  width: 100%;
+  max-width: 100%;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: $accent-purple-light;
+    background: $bg-card-hover;
+    box-shadow: 0 20px 32px -14px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (min-width: 1200px) {
+  .vacancy-card,
+  .task-card {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.tasks-grid .task-card,
+.vacancies-grid .vacancy-card {
+  max-width: 100%;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-lg $spacing-sm $spacing-lg;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.company-logo {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(145deg, #262633, #1c1c26);
+  border-radius: $radius-lg;
+  @include flex-center;
+  font-size: 2rem;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  flex-shrink: 0;
+}
+
+.company-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.company-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #e9deff;
+  margin-bottom: 6px;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.job-title {
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: $accent-purple-light;
+  letter-spacing: -0.2px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.salary-badge {
+  background: rgba(139, 92, 246, 0.2);
+  padding: 4px 12px;
+  border-radius: $radius-round;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d9c9ff;
+  border: 1px solid $border-color-light;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.card-body {
+  padding: $spacing-lg $spacing-lg $spacing-md;
+  flex: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: $spacing-md;
+}
+
+.tech-tag {
+  background: rgba(100, 70, 180, 0.4);
+  border-radius: $radius-xl;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #d4c5ff;
+  border: 0.5px solid rgba(168, 85, 247, 0.5);
+  white-space: nowrap;
+}
+
+.job-description {
+  color: #d3cef2;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deadline-info {
+  margin-top: $spacing-md;
+  padding-top: $spacing-sm;
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  font-size: 0.75rem;
+  color: #f97316;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.card-footer {
+  padding: $spacing-md $spacing-lg $spacing-lg;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  margin-top: auto;
+}
+
+.task-actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.swipe-action {
+  background: linear-gradient(115deg, #8b5cf6, #7c3aed);
+  border: none;
+  padding: 10px 24px;
+  border-radius: $radius-round;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 120px;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(115deg, #9b6eff, #8b5cf6);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+  }
+}
+
+.edit-btn {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  padding: 10px 20px;
+  border-radius: $radius-round;
+  color: $accent-purple-light;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 110px;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.25);
+    transform: translateY(-2px);
+    border-color: $accent-purple-light;
+    color: #e2caff;
+  }
+}
+
+.responses-btn {
+  background: linear-gradient(115deg, #8b5cf6, #7c3aed);
+  border: none;
+  padding: 10px 24px;
+  border-radius: $radius-round;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 120px;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(115deg, #9b6eff, #8b5cf6);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+  }
+}
+
+.delete-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 10px 20px;
+  border-radius: $radius-round;
+  color: #f87171;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 110px;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.25);
+    transform: translateY(-2px);
+    border-color: #ef4444;
+    color: #fecaca;
+  }
+}
+
+@media (max-width: 640px) {
+  .card-header {
+    padding: $spacing-md;
+    gap: $spacing-sm;
+  }
+
+  .company-logo {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .company-name {
+    font-size: 0.85rem;
+  }
+
+  .job-title {
+    font-size: 0.75rem;
+  }
+
+  .salary-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .card-body {
+    padding: $spacing-md;
+  }
+
+  .tech-stack {
+    gap: 6px;
+    margin-bottom: $spacing-sm;
+  }
+
+  .tech-tag {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .job-description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .deadline-info {
+    font-size: 0.7rem;
+  }
+
+  .card-footer {
+    padding: $spacing-sm $spacing-md $spacing-md;
+  }
+
+  .task-actions {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .swipe-action,
+  .edit-btn,
+  .responses-btn,
+  .delete-btn {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    min-width: auto;
+  }
+}

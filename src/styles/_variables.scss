@@ -1,0 +1,45 @@
+$bg-dark: #0c0c0f;
+$bg-card: #1a1a24;
+$bg-card-hover: #22222e;
+$bg-header: #14141c;
+
+$text-primary: #e2e2f0;
+$text-secondary: #cbc9f0;
+$text-muted: #b7ade0;
+$text-dark-muted: #9d93cb;
+
+$accent-purple: #a855f7;
+$accent-purple-light: #c084fc;
+$accent-purple-dark: #7c3aed;
+
+$gradient-primary: linear-gradient(135deg, #c084fc, #a855f7, #7c3aed);
+$gradient-text: linear-gradient(135deg, #d9a7ff, #b87cff);
+
+$border-color: rgba(168, 85, 247, 0.35);
+$border-color-light: rgba(168, 85, 247, 0.5);
+
+$shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.5);
+$shadow-md: 0 8px 20px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 20px 35px -12px rgba(0, 0, 0, 0.6);
+$shadow-card: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
+
+$transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+$transition-fast: all 0.25s ease;
+
+$breakpoint-tablet: 780px;
+$breakpoint-mobile: 640px;
+$breakpoint-small: 480px;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
+$radius-2xl: 48px;
+$radius-round: 60px;

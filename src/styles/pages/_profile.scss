@@ -1,0 +1,232 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  background: $bg-card;
+  border-radius: $radius-xl;
+  border: 1px solid $border-color;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+}
+
+.profile-avatar-section {
+  text-align: center;
+  padding: $spacing-xl $spacing-xl $spacing-lg;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-radius: 50%;
+  @include flex-center;
+  font-size: 3.5rem;
+  margin: 0 auto $spacing-lg;
+  border: 3px solid $accent-purple-light;
+  overflow: hidden;
+  cursor: default;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  @include gradient-text;
+  margin-bottom: $spacing-sm;
+}
+
+.profile-info {
+  padding: $spacing-xl;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-md 0;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.info-label {
+  width: 140px;
+  font-weight: 600;
+  color: $accent-purple-light;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.info-value {
+  flex: 1;
+  color: $text-primary;
+  font-size: 1rem;
+
+  span {
+    display: block;
+    padding: $spacing-xs 0;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 14px;
+    background: $bg-dark;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    color: $text-primary;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: $transition-fast;
+
+    &:focus {
+      outline: none;
+      border-color: $accent-purple-light;
+      background: $bg-card-hover;
+      box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.1);
+    }
+
+    &::placeholder {
+      color: #6b6b8a;
+    }
+  }
+}
+
+.telegram-value {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.telegram-linked {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.telegram-not-linked {
+  color: #f87171;
+  font-weight: 500;
+}
+
+.telegram-link-btn {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: $radius-round;
+  padding: 8px 20px;
+  color: #10b981;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(16, 185, 129, 0.25);
+    transform: translateY(-1px);
+  }
+}
+
+.profile-actions {
+  padding: $spacing-lg $spacing-xl $spacing-xl;
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+  text-align: center;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: #f87171;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-edit {
+  @include button-primary;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1.5px solid #ef4444;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-round;
+  color: #f87171;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.15);
+    transform: translateY(-2px);
+    border-color: #ef4444;
+    color: #fecaca;
+  }
+}
+
+.btn-save {
+  @include button-primary;
+}
+
+.btn-cancel {
+  @include button-outline;
+}
+
+@include mobile {
+  .info-row {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .info-label {
+    width: 100%;
+  }
+
+  .profile-avatar-section {
+    padding: $spacing-xl $spacing-lg $spacing-lg;
+  }
+
+  .profile-info {
+    padding: $spacing-lg;
+  }
+
+  .profile-actions {
+    padding: $spacing-lg $spacing-lg $spacing-xl;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    .btn-edit,
+    .btn-logout,
+    .btn-save,
+    .btn-cancel {
+      width: 100%;
+    }
+  }
+
+  .telegram-link-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,149 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.btn-primary {
+  @include button-primary;
+}
+
+.btn-outline {
+  @include button-outline;
+}
+
+.swipe-action,
+.responses-btn {
+  background: linear-gradient(115deg, #8b5cf6, #7c3aed);
+  border: none;
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-round;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 140px;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(115deg, #9b6eff, #8b5cf6);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+  }
+}
+
+.btn-add-task {
+  background: linear-gradient(115deg, #2a2a36, #1f1f2a);
+  border: 2px solid rgba(168, 85, 247, 0.6);
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-round;
+  color: $accent-purple-light;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(115deg, #323240, #262633);
+    border-color: $accent-purple-light;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  }
+}
+
+.btn-save {
+  background: linear-gradient(115deg, #8b5cf6, #7c3aed);
+  border: none;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-round;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.6);
+    background: linear-gradient(115deg, #9b6eff, #8b5cf6);
+  }
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1.5px solid $accent-purple;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-round;
+  color: #d9c9ff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+    border-color: $accent-purple-light;
+    color: #f0e6ff;
+  }
+}
+
+.btn-sm {
+  padding: $spacing-xs $spacing-md;
+  font-size: 0.85rem;
+  min-width: 100px;
+}
+
+.btn-lg {
+  padding: $spacing-md $spacing-2xl;
+  font-size: 1.1rem;
+  min-width: 180px;
+}
+
+.btn-danger {
+  background: linear-gradient(115deg, #dc2626, #b91c1c);
+
+  &:hover {
+    background: linear-gradient(115deg, #ef4444, #dc2626);
+  }
+}
+
+.btn-success {
+  background: linear-gradient(115deg, #10b981, #059669);
+
+  &:hover {
+    background: linear-gradient(115deg, #34d399, #10b981);
+  }
+}
+
+.delete-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 12px 24px;
+  border-radius: $radius-round;
+  color: #f87171;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: inherit;
+  min-width: 120px;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.25);
+    transform: translateY(-2px);
+    border-color: #ef4444;
+    color: #fecaca;
+  }
+}

@@ -1,0 +1,111 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset';
+@use 'animations';
+
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/tech-tags';
+@use 'components/header';
+@use 'components/footer';
+
+@use 'pages/home';
+@use 'pages/tasks';
+@use 'pages/task-detail';
+@use 'pages/replies';
+@use 'pages/profile';
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $spacing-xl;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: $spacing-2xl 0 64px;
+}
+
+.section-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: $spacing-xl;
+  text-align: center;
+  background: $gradient-text;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  display: inline-block;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: $spacing-sm;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, $accent-purple, $accent-purple-light, $accent-purple);
+    border-radius: $spacing-xs;
+  }
+}
+
+.page-header {
+  margin-bottom: $spacing-xl;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: $spacing-sm;
+  background: $gradient-text;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.page-subtitle {
+  color: $text-muted;
+  font-size: 1.05rem;
+  border-left: 3px solid $accent-purple;
+  padding-left: 18px;
+}
+
+hr {
+  margin: $spacing-xl 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    $accent-purple,
+    $accent-purple-light,
+    $accent-purple,
+    transparent
+  );
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .container {
+    padding: 0 $spacing-lg;
+  }
+
+  .main-content {
+    padding: $spacing-xl 0 $spacing-2xl;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

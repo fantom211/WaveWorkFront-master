@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: .
+    container_name: wavework-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
