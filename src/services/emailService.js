@@ -1,4 +1,4 @@
-import { API_BASE_URL } from './ApiConsts';
+import { API_BASE_URL } from "./ApiConsts";
 
 export const emailService = {
   async sendConfirmationCode(email) {
@@ -13,15 +13,13 @@ export const emailService = {
           },
         },
       );
-
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || 'Ошибка отправки кода');
       }
-
       return await response.text();
     } catch (error) {
-      console.error('Error sending confirmation code:', error);
+      console.error("Error sending confirmation code:", error);
       throw error;
     }
   },

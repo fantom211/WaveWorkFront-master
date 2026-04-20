@@ -13,6 +13,7 @@ function RepliesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [acceptingProposalId, setAcceptingProposalId] = useState(null);
 
   const loadUserTasks = useCallback(async () => {
     setLoading(true);
@@ -178,6 +179,39 @@ function RepliesPage() {
     setIsModalOpen(false);
   };
 
+  const handleAcceptExecutor = async (task, response) => {
+    if (!task?.id || !response?.id) {
+      alert('Не удалось определить отклик для принятия');
+      return;
+    }
+
+    try {
+      setAcceptingProposalId(response.id);
+      await proposalService.acceptProposal(response.id);
+
+      setTasks((prevTasks) =>
+        prevTasks.map((item) =>
+          item?.id === task.id
+            ? {
+              ...item,
+              status: 'InProgress',
+              executors: response.executorId ? [response.executorId] : item.executors,
+              responses: (item.responses || []).map((proposal) =>
+                proposal?.id === response.id
+                  ? { ...proposal, status: 'accepted' }
+                  : { ...proposal, status: 'rejected' },
+              ),
+            }
+            : item,
+        ),
+      );
+    } catch (err) {
+      alert('Ошибка принятия отклика: ' + err.message);
+    } finally {
+      setAcceptingProposalId(null);
+    }
+  };
+
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
@@ -309,6 +343,8 @@ function RepliesPage() {
                   task={task}
                   onDelete={handleDeleteTask}
                   onEdit={handleEditTask}
+                  onAcceptExecutor={handleAcceptExecutor}
+                  acceptingProposalId={acceptingProposalId}
                 />
               ) : null,
             )}

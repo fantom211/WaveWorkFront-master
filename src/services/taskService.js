@@ -1,21 +1,18 @@
-import { API_PROFILE, API_WORK } from './ApiConsts';
-import { USER_ID } from './ApiConsts';
+import { API_BASE_URL } from './ApiConsts';
 
 export const getHeaders = () => {
   const headers = {
     'Content-Type': 'application/json',
-    'X-User-Id': USER_ID,
   };
-
   return headers;
 };
 
 export const taskService = {
   async getAllTasks(page = 1, limit = 18) {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks?page=${page}&limit=${limit}`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks?page=${page}&limit=${limit}`, {
         method: 'GET',
-        headers: {},
+        headers: getHeaders(),
         credentials: 'include',
       });
 
@@ -33,7 +30,7 @@ export const taskService = {
 
   async getUserContact(userUuid) {
     try {
-      const response = await fetch(`${API_PROFILE}/profiles/me/contact/${userUuid}`, {
+      const response = await fetch(`${API_BASE_URL}/profile/profiles/me/contact/${userUuid}`, {
         method: 'GET',
         headers: getHeaders(),
         credentials: 'include',
@@ -53,7 +50,7 @@ export const taskService = {
 
   async getUserTasks() {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks/my`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks/my`, {
         method: 'GET',
         headers: getHeaders(),
         credentials: 'include',
@@ -73,9 +70,33 @@ export const taskService = {
     }
   },
 
+  async assignExecutor(taskId, executorId) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: getHeaders(),
+        credentials: 'include',
+        body: JSON.stringify({
+          status: 'InProgress',
+          executors: [executorId],
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Ошибка назначения исполнителя');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error assigning executor:', error);
+      throw error;
+    }
+  },
+
   async getTaskById(id) {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks/${id}`, {
         method: 'GET',
         headers: getHeaders(),
         credentials: 'include',
@@ -95,7 +116,7 @@ export const taskService = {
 
   async createTask(taskData) {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks`, {
         method: 'POST',
         headers: getHeaders(),
         credentials: 'include',
@@ -124,7 +145,7 @@ export const taskService = {
 
   async updateTask(id, taskData) {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks/${id}`, {
         method: 'PATCH',
         headers: getHeaders(),
         credentials: 'include',
@@ -153,7 +174,7 @@ export const taskService = {
 
   async deleteTask(id) {
     try {
-      const response = await fetch(`${API_WORK}/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/work/api/tasks/${id}`, {
         method: 'DELETE',
         headers: getHeaders(),
         credentials: 'include',

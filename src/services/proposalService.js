@@ -1,17 +1,16 @@
 import { API_PROPOSAL } from './ApiConsts';
-import { USER_ID } from './ApiConsts';
 
 export const getHeaders = () => {
-  return {
+  const headers = {
     'Content-Type': 'application/json',
-    'X-User-Id': USER_ID,
   };
+  return headers;
 };
 
 export const proposalService = {
   async createProposal(taskId) {
     try {
-      const response = await fetch(`${API_PROPOSAL}/api/proposals`, {
+      const response = await fetch(`${API_BASE_URL}/proposal/api/proposals`, {
         method: 'POST',
         headers: getHeaders(),
         credentials: 'include',
@@ -35,7 +34,7 @@ export const proposalService = {
   async getTaskProposals(taskId, page = 1, limit = 18) {
     try {
       const response = await fetch(
-        `${API_PROPOSAL}/api/proposals/task/${taskId}?page=${page}&limit=${limit}`,
+        `${API_BASE_URL}/proposal/api/proposals/task/${taskId}?page=${page}&limit=${limit}`,
         {
           method: 'GET',
           headers: getHeaders(),
@@ -57,7 +56,7 @@ export const proposalService = {
 
   async getUserProposals(page = 1, limit = 18) {
     try {
-      const response = await fetch(`${API_PROPOSAL}/api/proposals/my?page=${page}&limit=${limit}`, {
+      const response = await fetch(`${API_BASE_URL}/proposal/api/proposals/my?page=${page}&limit=${limit}`, {
         method: 'GET',
         headers: getHeaders(),
         credentials: 'include',
@@ -71,6 +70,31 @@ export const proposalService = {
       return await response.json();
     } catch (error) {
       console.error('Error fetching user proposals:', error);
+      throw error;
+    }
+  },
+
+  async acceptProposal(proposalId) {
+    try {
+       const response = await fetch(`${API_BASE_URL}/proposal/api/proposals/${proposalId}/accept`, {
+        method: 'PATCH',
+        headers: getHeaders(),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Ошибка принятия отклика');
+      }
+
+      if (response.status === 204) {
+        return true;
+      }
+
+      const responseText = await response.text();
+      return responseText ? JSON.parse(responseText) : true;
+    } catch (error) {
+      console.error('Error accepting proposal:', error);
       throw error;
     }
   },

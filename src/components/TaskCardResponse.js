@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ResponseItem from './ResponseItem';
 import EditTaskModal from './EditTaskModal';
 
-function TaskCardResponse({ task, onDelete, onEdit }) {
+function TaskCardResponse({ task, onDelete, onEdit, onAcceptExecutor, acceptingProposalId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -69,6 +69,7 @@ function TaskCardResponse({ task, onDelete, onEdit }) {
   const technologies = task.technologies || [];
   const deadline = task.deadline;
   const responses = task.responses || [];
+  const isInProgress = task.status === 'InProgress';
 
   return (
     <>
@@ -116,15 +117,35 @@ function TaskCardResponse({ task, onDelete, onEdit }) {
         <div className={`responses-list ${isOpen ? 'open' : ''}`}>
           {responses.length > 0 ? (
             responses.map((response, index) => (
-              <ResponseItem
-                key={response?.id || index}
-                response={{
-                  login: response.contact?.username || response.executorId || 'Пользователь',
-                  phone: response.contact?.phone,
-                  email: response.contact?.email,
-                  telegram: response.contact?.telegramUsername,
-                }}
-              />
+              <div key={response?.id || index} className="response-item-with-action">
+                <ResponseItem
+                  response={{
+                    login: response.contact?.username || response.executorId || 'Пользователь',
+                    phone: response.contact?.phone,
+                    email: response.contact?.email,
+                    telegram: response.contact?.telegramUsername,
+                  }}
+                />
+                <button
+                  className="btn-primary"
+                  style={{ marginTop: '8px' }}
+                  disabled={
+                    !response?.id
+                    || acceptingProposalId === response.id
+                    || response?.status === 'rejected'
+                    || (isInProgress && response?.status !== 'accepted')
+                  }
+                  onClick={() => onAcceptExecutor(task, response)}
+                >
+                  {acceptingProposalId === response.id
+                    ? 'Принятие...'
+                    : response?.status === 'accepted'
+                      ? 'Принят в работу'
+                      : response?.status === 'rejected'
+                        ? 'Отклонен'
+                        : 'Выбрать исполнителя'}
+                </button>
+              </div>
             ))
           ) : (
             <div className="empty-responses">Нет откликов</div>

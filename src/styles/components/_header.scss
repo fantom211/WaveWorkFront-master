@@ -77,3 +77,16 @@
     gap: $spacing-md;
   }
 }
+
+@include tablet {
+  .user-switch-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: $spacing-sm;
+  }
+
+  .btn-switch-user {
+    padding: $spacing-xs $spacing-md;
+    font-size: 0.85rem;
+  }
+}

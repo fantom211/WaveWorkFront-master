@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { taskService } from '../services/taskService';
 import { proposalService } from '../services/proposalService';
 import { getHeaders } from '../services/taskService';
-import { API_PROFILE } from '../services/ApiConsts';
+import { API_BASE_URL } from '../services/ApiConsts';
 
 function TaskDetailPage() {
   const { id } = useParams();
@@ -23,12 +23,12 @@ function TaskDetailPage() {
 
       try {
         const contactResponse = await fetch(
-          `${API_PROFILE}/profiles/me/contact/${task.createdByUserId}`,
+          `${API_BASE_URL}/profile/profiles/me/contact/${task.createdByUserId}`,
           {
             method: 'GET',
             headers: getHeaders(),
             credentials: 'include',
-          },
+          }
         );
 
         if (contactResponse.ok) {

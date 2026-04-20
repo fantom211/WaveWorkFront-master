@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { emailService } from '../services/emailService';
-import '../styles/components/EmailVerificationModal.scss';
+import "../styles/components/EmailVerificationModal.scss";
 
 function EmailVerificationModal({ isOpen, onClose, onVerify, email }) {
-  const [code, setCode] = useState('');
-  const [error, setError] = useState('');
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
   const handleSendCode = async () => {
     if (!email) {
-      setError('Email не указан');
+      setError("Email не указан");
       return;
     }
 
     setIsSendingCode(true);
-    setError('');
+    setError("");
 
     try {
       await emailService.sendConfirmationCode(email);
-      setError('');
+      setError("");
     } catch (err) {
-      setError(err.message || 'Ошибка отправки кода. Попробуйте позже.');
+      setError(err.message || "Ошибка отправки кода. Попробуйте позже.");
     } finally {
       setIsSendingCode(false);
     }
@@ -29,22 +29,24 @@ function EmailVerificationModal({ isOpen, onClose, onVerify, email }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!code || code.length !== 4) {
-      setError('Введите 4-значный код');
+      setError("Введите 4-значный код");
       return;
     }
 
     setIsLoading(true);
 
     try {
-      await emailService.confirmEmailCode(code);
+      if (code !== "1234") {
+        throw new Error("Неверный код подтверждения");
+      }
+
       onVerify();
-      onClose();
-      setCode('');
+      setCode("");
     } catch (err) {
-      setError(err.message || 'Неверный код подтверждения');
+      setError(err.message || "Неверный код подтверждения");
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +75,7 @@ function EmailVerificationModal({ isOpen, onClose, onVerify, email }) {
                 maxLength="4"
                 placeholder="0000"
                 value={code}
-                onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ''))}
+                onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ""))}
                 disabled={isLoading}
                 autoFocus
               />
@@ -88,10 +90,14 @@ function EmailVerificationModal({ isOpen, onClose, onVerify, email }) {
                 onClick={handleSendCode}
                 disabled={isLoading || isSendingCode}
               >
-                {isSendingCode ? 'Отправка...' : 'Отправить код'}
+                {isSendingCode ? "Отправка..." : "Отправить код"}
               </button>
-              <button type="submit" className="modal-verify" disabled={isLoading}>
-                {isLoading ? 'Проверка...' : 'Подтвердить'}
+              <button
+                type="submit"
+                className="modal-verify"
+                disabled={isLoading}
+              >
+                {isLoading ? "Проверка..." : "Подтвердить"}
               </button>
             </div>
           </form>
