@@ -1,9 +1,15 @@
-import { API_AUTH } from './ApiConsts';
+import { API_BASE_URL} from './ApiConsts';
 
 export const authService = {
+  /**
+   * Вход в систему
+   * @param {string} username - Имя пользователя
+   * @param {string} password - Пароль
+   * @returns {Promise} - Результат входа
+   */
   async login(username, password) {
     try {
-      const response = await fetch(`${API_AUTH}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/auth/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,9 +31,15 @@ export const authService = {
     }
   },
 
+    /**
+   * Регистрация нового пользователя
+   * @param {string} username - Имя пользователя
+   * @param {string} password - Пароль
+   * @returns {Promise} - Результат регистрации
+   */
   async register(username, password) {
     try {
-      const response = await fetch(`${API_AUTH}/auth/registration`, {
+      const response = await fetch(`${API_BASE_URL}/auth/auth/registration`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,9 +63,13 @@ export const authService = {
     }
   },
 
+    /**
+   * Выход из системы (удаление сессии на сервере)
+   * @returns {Promise} - Результат выхода
+   */
   async logout() {
     try {
-      const response = await fetch(`${API_AUTH}/auth/logout`, {
+      const response = await fetch(`${API_BASE_URL}/auth/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,12 +92,20 @@ export const authService = {
     }
   },
 
+    /**
+   * Очистка локальных данных пользователя
+   */
   clearLocalData() {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userLogin');
     localStorage.removeItem('userId');
   },
 
+
+  /**
+   * Проверка авторизации
+   * @returns {boolean} - Авторизован ли пользователь
+   */
   isAuthenticated() {
     return localStorage.getItem('isAuthenticated') === 'true';
   },

@@ -1,4 +1,4 @@
-import { API_PROPOSAL } from './ApiConsts';
+import { API_BASE_URL } from './ApiConsts';
 
 export const getHeaders = () => {
   const headers = {
