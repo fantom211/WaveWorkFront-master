@@ -10,7 +10,7 @@ export const getHeaders = () => {
 export const taskService = {
   async getAllTasks(page = 1, limit = 18) {
     try {
-      const response = await fetch(`${API_BASE_URL}/work/api/tasks?page=${page}&limit=${limit}`, {
+      const response = await fetch(`${API_BASE_URL}/recommendations/me?subjectType=JOB&page=${page}&limit=${limit}`, {
         method: 'GET',
         headers: getHeaders(),
         credentials: 'include',

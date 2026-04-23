@@ -21,7 +21,7 @@ function TasksPage() {
         const response = await taskService.getAllTasks(currentPage, limit);
         console.log('Response:', response);
 
-        const tasksData = Array.isArray(response.data) ? response.data : [];
+        const tasksData = Array.isArray(response.items) ? response.items : [];
 
         setTasks(tasksData);
 
