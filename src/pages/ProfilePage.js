@@ -110,11 +110,7 @@ function ProfilePage() {
           1,
           100,
         );
-        const proposals =
-          proposalsResponse?.items ||
-          proposalsResponse?.data ||
-          proposalsResponse ||
-          [];
+        const proposals = proposalsResponse?.data ?? [];
 
         if (!Array.isArray(proposals) || proposals.length === 0) {
           setApprovedTasks([]);
